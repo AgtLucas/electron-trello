@@ -26,10 +26,11 @@ function createMainWindow() {
   const win = new BrowserWindow({
     'title': app.getName(),
     'show': false,
-    'width': 800,
-    'height': 600,
-    'min-width': 400,
-    'min-height': 200,
+    'width': 1100,
+    'height': 700,
+    'min-width': 600,
+    'min-height': 400,
+    'title-bar-style': 'hidden-inset',
     'icon': path.join(__dirname, 'media', 'Icon.png'),
     'web-preferences': {
       'node-integration': false,
@@ -50,6 +51,7 @@ app.on('ready', () => {
   const page = mainWindow.webContents;
 
   page.on('dom-ready', () => {
+    page.insertCSS(fs.readFileSync(path.join(__dirname, 'browser.css'), 'utf-8'));
     mainWindow.show();
   });
 
